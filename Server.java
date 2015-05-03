@@ -11,7 +11,7 @@ public class Server {
 	private ServerSocket ss = null;
 	public Socket player1, player2;
 	public Scanner scan1, scan2;
-	private PrintWriter pw1, pw2;
+	public PrintWriter pw1, pw2;
 
 
 
@@ -44,8 +44,7 @@ public class Server {
 
 	private Socket WaitPlayer()throws IOException{
 		Socket player = ss.accept();
-		System.out.println("Novo player: " + player.getInetAddress().getHostAddress()
-		);
+		System.out.println("Novo player: " + player.getInetAddress().getHostAddress());
 		return player;
 	}
 
@@ -59,7 +58,6 @@ public class Server {
 				break;
 			default:
 				break;
-
 		}
 	}
 

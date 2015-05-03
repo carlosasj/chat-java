@@ -1,42 +1,43 @@
 package chatjava;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class ReceiveMove implements Runnable{
 
 	public Server s;
 	public int player;
-	public InputStream is;
+	public Scanner scan;
+	public PrintWriter pw;
 
 	public ReceiveMove(Server s, int player)throws IOException{
 		this.s = s;
 		this.player = player;
 		switch (player){
 			case 1:
-				this.is = this.s.player1.getInputStream();
+				this.scan = s.scan1;
+				this.pw = s.pw1;
 				break;
 			case 2:
-				this.is = this.s.player2.getInputStream();
+				this.scan = s.scan2;
+				this.pw = s.pw2;
 				break;
 			default:
 				break;
 		}
-
 	}
 
 	@Override
 	public void run() {
 
-		Scanner scan = new Scanner(is);
 		String input;
-		while (true) {
-			System.out.println("While...");
+		while (scan.hasNextLine()) {
 			input = scan.nextLine();
-			System.out.println(input);
+			pw.println(input);
+			System.out.println("Player " + player + " : " + input);
 		}
 
-		//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }
