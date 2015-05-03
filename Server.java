@@ -9,25 +9,27 @@ import java.util.Scanner;
 
 public class Server {
 	private ServerSocket ss = null;
-	public Socket player1, player2;
-	public Scanner scan1, scan2;
-	public PrintWriter pw1, pw2;
+	public Socket[] player;
+	public Scanner[] scan;
+	public PrintWriter[] pw;
 
 
 
 	void startServer(int port) throws IOException{
 		this.ss = new ServerSocket(port);
+
+		player = new Socket[2];
+		scan = new Scanner[2];
+		pw = new PrintWriter[2];
+
 		System.out.println("Porta " + port + " aberta!");
 
-		this.player1 = WaitPlayer();
-		this.scan1 = new Scanner(this.player1.getInputStream());
-		this.pw1 = new PrintWriter(this.player1.getOutputStream(), true);
-		//this.pw1.println("Conectado com sucesso. Aguardando Player 2.");
+		for (int i = 0; i < 2; i++){
+			this.player[i] = WaitPlayer();
+			this.scan[i] = new Scanner(this.player[i].getInputStream());
+			this.pw[i] = new PrintWriter(this.player[i].getOutputStream(), true);
+		}
 
-		this.player2 = WaitPlayer();
-		this.scan2 = new Scanner(this.player2.getInputStream());
-		this.pw2 = new PrintWriter(this.player2.getOutputStream(), true);
-		//this.pw2.println("Conectado com sucesso.");
 
 
 	}
@@ -38,8 +40,8 @@ public class Server {
 		this.scan1.close();
 		this.scan2.close();
 		this.ss.close();
-		this.player1.close();
-		this.player2.close();
+		this.player[0].close();
+		this.player[1].close();
 	}
 
 	private Socket WaitPlayer()throws IOException{
