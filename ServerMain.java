@@ -10,8 +10,18 @@ public class ServerMain {
 		Server server = new Server();
 		server.startServer(12345);
 
-		server.sendAll("oi");
+		server.sendAll("ready");
 
-		server.closeServer();
+		ReceiveMove rm1 = new ReceiveMove(server, 1);
+		ReceiveMove rm2 = new ReceiveMove(server, 2);
+
+		Thread tr_p1 = new Thread(rm1);
+		Thread tr_p2 = new Thread(rm2);
+
+		tr_p1.start();
+		tr_p2.start();
+		//
+
+		//server.closeServer();
 	}
 }

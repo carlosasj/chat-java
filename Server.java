@@ -1,6 +1,7 @@
 package chatjava;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,9 +9,10 @@ import java.util.Scanner;
 
 public class Server {
 	private ServerSocket ss = null;
-	private Socket player1, player2;
-	private Scanner scan1, scan2;
+	public Socket player1, player2;
+	public Scanner scan1, scan2;
 	private PrintWriter pw1, pw2;
+
 
 
 	void startServer(int port) throws IOException{
@@ -18,15 +20,16 @@ public class Server {
 		System.out.println("Porta " + port + " aberta!");
 
 		this.player1 = WaitPlayer();
-		this.pw1.println("Conectado 1");
-		this.player2 = WaitPlayer();
-		this.pw1.println("Conectado 2");
-
 		this.scan1 = new Scanner(this.player1.getInputStream());
-		this.scan2 = new Scanner(this.player2.getInputStream());
-
 		this.pw1 = new PrintWriter(this.player1.getOutputStream(), true);
+		//this.pw1.println("Conectado com sucesso. Aguardando Player 2.");
+
+		this.player2 = WaitPlayer();
+		this.scan2 = new Scanner(this.player2.getInputStream());
 		this.pw2 = new PrintWriter(this.player2.getOutputStream(), true);
+		//this.pw2.println("Conectado com sucesso.");
+
+
 	}
 
 	void closeServer() throws IOException{
@@ -44,6 +47,20 @@ public class Server {
 		System.out.println("Novo player: " + player.getInetAddress().getHostAddress()
 		);
 		return player;
+	}
+
+	void sendMsg(int player, String msg){
+		switch (player){
+			case 1:
+				this.pw1.println(msg);
+				break;
+			case 2:
+				this.pw2.println(msg);
+				break;
+			default:
+				break;
+
+		}
 	}
 
 	void sendAll(String str){
