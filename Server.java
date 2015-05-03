@@ -35,13 +35,12 @@ public class Server {
 	}
 
 	void closeServer() throws IOException{
-		this.pw1.close();
-		this.pw2.close();
-		this.scan1.close();
-		this.scan2.close();
-		this.ss.close();
-		this.player[0].close();
-		this.player[1].close();
+		for (int i = 0; i < 2; i++){
+			pw[i].close();
+			scan[i].close();
+			player[i].close();
+		}
+		ss.close();
 	}
 
 	private Socket WaitPlayer()throws IOException{
@@ -51,20 +50,11 @@ public class Server {
 	}
 
 	void sendMsg(int player, String msg){
-		switch (player){
-			case 1:
-				this.pw1.println(msg);
-				break;
-			case 2:
-				this.pw2.println(msg);
-				break;
-			default:
-				break;
-		}
+		pw[player].println(msg);
 	}
 
 	void sendAll(String str){
-		this.pw1.println(str);
-		this.pw2.println(str);
+		sendMsg(0, str);
+		sendMsg(1, str);
 	}
 }

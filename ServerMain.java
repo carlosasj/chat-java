@@ -12,8 +12,8 @@ public class ServerMain {
 
 		server.sendAll("ready");
 
-		ReceiveMove rm1 = new ReceiveMove(server, 1);
-		ReceiveMove rm2 = new ReceiveMove(server, 2);
+		ReceiveMove rm1 = new ReceiveMove(server, 0);
+		ReceiveMove rm2 = new ReceiveMove(server, 1);
 
 		Thread tr_p1 = new Thread(rm1);
 		Thread tr_p2 = new Thread(rm2);
