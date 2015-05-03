@@ -11,7 +11,7 @@ import javafx.stage.*;
 
 import java.security.Timestamp;
 
-public class window {
+public class window extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -5,16 +5,29 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class comm {
-	public static void main(String trav[]) throws java.io.IOException{
+	public String[] ip;
+	public int port;
+	private Socket s = null;
+	private PrintWriter msg = null;
 
-		Socket s = new Socket("143.107.231.103", 12345);
+	public comm() {
+		port = 12345;
+	}
 
-		OutputStream out = s.getOutputStream();
-		PrintWriter msg = new PrintWriter(out, true);
+	public void startComm() throws java.io.IOException{
+		this.s = new Socket(this.ip, this.port);
+		PrintWriter msg = new PrintWriter(s.getOutputStream(), true);
+	}
 
-		//msg.println("Teste42");
-		//.println("WOW!");
+	public void closeComm() throws java.io.IOException{
+		this.s.close();
+	}
 
-		s.close();
+	public void setIP(String[] ip){
+		this.ip = ip;
+	}
+
+	public void send(String[] str) throws java.io.IOException {
+		msg.println(str);
 	}
 }
