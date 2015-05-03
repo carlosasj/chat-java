@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+import java.io.IOException;
 import java.security.Timestamp;
 
 public class window extends Application {
@@ -16,10 +17,24 @@ public class window extends Application {
 		launch(args);
 	}
 
+	private Stage primaryStage;
+	private comm c;
+
+	public window() throws IOException {
+		primaryStage = new Stage();
+		c = new comm();
+		c.setIP("172.26.236.219");
+		try {
+			c.startComm();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private final static String newline = "\n";
 
-	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Chat IRC");
+	public void start(Stage primaryStage) throws IOException{
+		this.primaryStage.setTitle("Chat IRC");
 
 		HBox hb = new HBox();
 		TextArea ta = new TextArea();
@@ -32,8 +47,12 @@ public class window extends Application {
 		Button btn = new Button();
 		btn.setText("Send");
 		btn.setOnAction(event -> {
-			System.out.println(tf.getText());
 			ta.appendText(  ">\t" + tf.getText() + newline);
+			try {
+				c.send(tf.getText());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			tf.clear();
 			tf.requestFocus();
 		});
@@ -47,9 +66,8 @@ public class window extends Application {
 		vb.getChildren().add(hb);
 
 		Scene scene = new Scene(vb);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
 
 
 		ta.setEditable(false);
