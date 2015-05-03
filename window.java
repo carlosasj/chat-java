@@ -23,7 +23,7 @@ public class window extends Application {
 	public window() throws IOException {
 		primaryStage = new Stage();
 		c = new comm();
-		c.setIP("172.26.236.219");
+		c.setIP("127.0.0.1");
 		try {
 			c.startComm();
 		} catch (IOException e) {
