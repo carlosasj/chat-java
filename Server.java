@@ -42,7 +42,6 @@ public class Server {
 			this.player[i] = WaitPlayer();
 			this.scan[i] = new Scanner(this.player[i].getInputStream());
 			this.pw[i] = new PrintWriter(this.player[i].getOutputStream(), true);
-			//this.pw[i].println(Integer.valueOf(i).toString());
 			sendMsg(i, Integer.valueOf(i).toString());
 		}
 

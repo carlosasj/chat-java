@@ -1,8 +1,6 @@
 package chatjava;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class ReceiveMove implements Runnable{
 
@@ -20,7 +18,7 @@ public class ReceiveMove implements Runnable{
 		String input;
 		while (s.scan[player].hasNextLine()) {
 			input = s.scan[player].nextLine();
-			s.pw[player].println(input);
+			s.pw[(1-player)].println(input);
 			System.out.println("Player " + player + " : " + input);
 		}
 
