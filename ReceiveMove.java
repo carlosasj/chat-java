@@ -7,7 +7,7 @@ public class ReceiveMove implements Runnable{
 	public Server s;
 	public int player;
 
-	public ReceiveMove(Server s, int player)throws IOException{
+	public ReceiveMove(Server s, int player){
 		this.s = s;
 		this.player = player;
 	}
@@ -18,14 +18,10 @@ public class ReceiveMove implements Runnable{
 		String input;
 		while (s.scan[player].hasNextLine()) {
 			input = s.scan[player].nextLine();
-			//s.pw[(1-player)].println(input);
 			System.out.println("> Input Player  " + player + " : \"" + input + "\"");
 			s.sendMsg((1-player), input);
-
-
-			//System.out.println("  Saida Player " + (1-player) + " : " + input + "\n");
 		}
-
+		System.out.println("Player " + player + " saiu.");
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }

@@ -17,7 +17,7 @@ public class Server {
 	void startServer(int port) throws IOException{
 		this.ss = new ServerSocket(port);
 
-		System.out.println("Seus possiveis IP's:");
+		System.out.println("May the 4th be with you.\n\nSeus possiveis IP's:");
 		Enumeration e = NetworkInterface.getNetworkInterfaces();
 		while(e.hasMoreElements())
 		{

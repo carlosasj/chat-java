@@ -7,7 +7,7 @@ public class ServerMain {
 		Server server = new Server();
 		server.startServer(12345);
 
-		//server.sendAll("ready");
+		server.sendAll("ready");
 
 		ReceiveMove rm1 = new ReceiveMove(server, 0);
 		ReceiveMove rm2 = new ReceiveMove(server, 1);
