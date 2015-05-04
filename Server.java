@@ -22,11 +22,13 @@ public class Server {
 		this.player1 = WaitPlayer();
 		this.scan1 = new Scanner(this.player1.getInputStream());
 		this.pw1 = new PrintWriter(this.player1.getOutputStream(), true);
+		pw1.println("0");
 		//this.pw1.println("Conectado com sucesso. Aguardando Player 2.");
 
 		this.player2 = WaitPlayer();
 		this.scan2 = new Scanner(this.player2.getInputStream());
 		this.pw2 = new PrintWriter(this.player2.getOutputStream(), true);
+		pw2.println("1");
 		//this.pw2.println("Conectado com sucesso.");
 
 
