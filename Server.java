@@ -2,8 +2,8 @@ package chatjava;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
+import java.util.Enumeration;
 import java.util.Scanner;
 
 public class Server {
@@ -17,6 +17,21 @@ public class Server {
 	void startServer(int port) throws IOException{
 		this.ss = new ServerSocket(port);
 
+		System.out.println("Seus possiveis IP's:");
+		Enumeration e = NetworkInterface.getNetworkInterfaces();
+		while(e.hasMoreElements())
+		{
+			NetworkInterface n = (NetworkInterface) e.nextElement();
+			Enumeration ee = n.getInetAddresses();
+			while (ee.hasMoreElements())
+			{
+				InetAddress i = (InetAddress) ee.nextElement();
+				System.out.println("\t> " +i.getHostAddress());
+			}
+		}
+		System.out.println("Provavel IP: " + Inet4Address.getLocalHost());
+
+
 		player = new Socket[2];
 		scan = new Scanner[2];
 		pw = new PrintWriter[2];
@@ -27,6 +42,8 @@ public class Server {
 			this.player[i] = WaitPlayer();
 			this.scan[i] = new Scanner(this.player[i].getInputStream());
 			this.pw[i] = new PrintWriter(this.player[i].getOutputStream(), true);
+			//this.pw[i].println(Integer.valueOf(i).toString());
+			sendMsg(i, Integer.valueOf(i).toString());
 		}
 
 
@@ -44,11 +61,12 @@ public class Server {
 
 	private Socket WaitPlayer()throws IOException{
 		Socket player = ss.accept();
-		System.out.println("Novo player: " + player.getInetAddress().getHostAddress());
+		System.out.println("\n\tNovo player: " + player.getInetAddress().getHostAddress());
 		return player;
 	}
 
 	void sendMsg(int player, String msg){
+		System.out.println("Send Player: " + player + " : \"" + msg +"\"");
 		pw[player].println(msg);
 	}
 
