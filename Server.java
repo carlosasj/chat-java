@@ -58,6 +58,8 @@ public class Server {
 		ss.close();
 	}
 
+
+
 	private Socket WaitPlayer()throws IOException{
 		Socket player = ss.accept();
 		System.out.println("+ Novo player: " + player.getInetAddress().getHostAddress());
