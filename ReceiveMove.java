@@ -18,8 +18,12 @@ public class ReceiveMove implements Runnable{
 		String input;
 		while (s.scan[player].hasNextLine()) {
 			input = s.scan[player].nextLine();
-			s.pw[(1-player)].println(input);
-			System.out.println("Player " + player + " : " + input);
+			//s.pw[(1-player)].println(input);
+			System.out.println("> Input Player  " + player + " : \"" + input + "\"");
+			s.sendMsg((1-player), input);
+
+
+			//System.out.println("  Saida Player " + (1-player) + " : " + input + "\n");
 		}
 
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

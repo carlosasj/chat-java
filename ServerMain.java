@@ -2,15 +2,12 @@ package chatjava;
 
 import java.io.IOException;
 
-/**
- * Created by CarlosAlberto on 03/05/2015.
- */
 public class ServerMain {
 	public static void main(String[] args) throws IOException {
 		Server server = new Server();
 		server.startServer(12345);
 
-		server.sendAll("ready");
+		//server.sendAll("ready");
 
 		ReceiveMove rm1 = new ReceiveMove(server, 0);
 		ReceiveMove rm2 = new ReceiveMove(server, 1);
@@ -20,7 +17,6 @@ public class ServerMain {
 
 		tr_p1.start();
 		tr_p2.start();
-		//
 
 		//server.closeServer();
 	}

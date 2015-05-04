@@ -29,14 +29,14 @@ public class Server {
 				System.out.println("\t> " +i.getHostAddress());
 			}
 		}
-		System.out.println("Provavel IP: " + Inet4Address.getLocalHost());
+		System.out.println("* Provavel IP: " + Inet4Address.getLocalHost());
 
 
 		player = new Socket[2];
 		scan = new Scanner[2];
 		pw = new PrintWriter[2];
 
-		System.out.println("Porta " + port + " aberta!");
+		System.out.println("* Porta " + port + " aberta!\n");
 
 		for (int i = 0; i < 2; i++){
 			this.player[i] = WaitPlayer();
@@ -60,12 +60,12 @@ public class Server {
 
 	private Socket WaitPlayer()throws IOException{
 		Socket player = ss.accept();
-		System.out.println("\n\tNovo player: " + player.getInetAddress().getHostAddress());
+		System.out.println("+ Novo player: " + player.getInetAddress().getHostAddress());
 		return player;
 	}
 
 	void sendMsg(int player, String msg){
-		System.out.println("Send Player: " + player + " : \"" + msg +"\"");
+		System.out.println("\tSend Player " + player + " : \"" + msg +"\"\n");
 		pw[player].println(msg);
 	}
 
